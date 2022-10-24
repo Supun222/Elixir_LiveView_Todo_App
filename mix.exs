@@ -50,7 +50,8 @@ defmodule LiveViewTodos.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:ex_heroicons, "~> 2.0.0"}
+      {:ex_heroicons, "~> 2.0.0"},
+      {:surface, "~> 0.8.0"}
     ]
   end
 
