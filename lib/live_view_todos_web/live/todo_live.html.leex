@@ -1,0 +1,57 @@
+<main>
+    <h3 class="font-bold text-6xl">Todo App</h3>
+    <div class="p-5 border-2 border-dashed rounded-md mt-5"  >
+        <form phx-submit="add">
+            <div class="flex flex-row mt-5 items-center justify-between">
+                <label class="text-4xl w-fit" >Add a new todo item:</label>
+                <div class="w-10/12">
+                    <%= text_input :todo, :title, placeholder: "What you want to get done?..." %>
+                </div>
+            </div>
+            <%= submit "Add", phx_disable_with: "Adding...", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg mt-5"%>
+        </form>
+    </div>
+    <div class="border p-10 mt-10 rounded-md bg-gray-200 grid grid-cols-5 items-center">
+        <p class="text-3xl col-span-3 font-bold ">Task</p>
+        <p class="text-3xl font-bold text-center">Status</p>
+        <p class="text-3xl font-bold text-end">Operations</p>
+    </div>
+    <%= if Enum.empty?(@todos) do %>
+        <div class="w-full bg-gray-100 p-10 mt-5 rounded-md">
+            <h3 class="text-4xl col-span-3 text-gray-600 text-center tracking-wide">Please insert a task</h3>
+        </div>
+    <% end %>
+    <%= if true do %>
+        <div class="mt-5">
+            <%= for todo <- @todos do %>
+                <div class="border p-10 mt-2 rounded-md bg-gray-50 grid grid-cols-5 items-center">
+                    <h3 class="text-4xl col-span-3 text-gray-600"><%= todo.title %></h3>
+                    <%= if todo.done == false do %>
+                        <div class="text-center text-gray-600 text-3xl" ><p class="text-orange-600" >Mark as completed</p></div>
+                        <div class="items-center flex flex-row justify-end">
+                            <%= link to: "#", phx_click: "toggle_done", phx_value_id: todo.id, class: "text-blue-600 mr-2" do %>
+                                <div class="bg-white p-3 shadow rounded-md" >
+                                    <%= Heroicons.icon("check-circle", type: "outline", class: "h-10 w-10 text-green-500") %>
+                                </div>
+                            <% end %>
+                            <%= link to: "#", phx_click: "delete_task", phx_value_id: todo.id, class: "text-blue-600 mr-2" do %>
+                                <div class="bg-white p-3 shadow rounded-md" >
+                                    <%= Heroicons.icon("trash", type: "outline", class: "h-10 w-10 text-red-500") %>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <div class="text-center text-gray-600 text-3xl" ><p class="text-green-600" >Completed</p></div>
+                        <div class="items-center flex flex-row justify-end">
+                            <%= link to: "#", phx_click: "delete_task", phx_value_id: todo.id, class: "text-blue-600 mr-2" do %>
+                                <div class="bg-white p-3 shadow rounded-md" >
+                                    <%= Heroicons.icon("trash", type: "outline", class: "h-10 w-10 text-red-500") %>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+</main>
