@@ -19,6 +19,7 @@ defmodule LiveViewTodosWeb.Router do
 
     # get "/", PageController, :index
     live "/", TodoLive, :index
+    # live "/example", TodoLive
   end
 
   # Other scopes may use custom stacks.

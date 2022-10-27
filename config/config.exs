@@ -7,6 +7,10 @@
 # General application configuration
 import Config
 
+config :surface, :components, [
+  {Surface.Components.Form.ErrorTag, default_translator: {LiveViewTodosWeb.ErrorHelpers, :translate_error}}
+]
+
 config :live_view_todos,
   ecto_repos: [LiveViewTodos.Repo]
 
